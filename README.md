@@ -9,7 +9,7 @@ This Tool is built by **Georgio Yammine**.
 **Java 8**, **JavaFX** and **FXML** with **JMetro** Library.
 
 ## Drawing tools
-**Pen**, **Brush**, **Eraser**, **Color Picker**, **Bucket Fill**, along **2 color selector** one for left click and the other for the right click.
+**Pen**, **Brush**, **Eraser**, **Color Picker**, **Bucket Fill**, along **2 color selectors** one for left click and the other for the right click.
 
 ## Shapes
 **Rectangle**, **Round Rectangle**, **Ellipse**.
