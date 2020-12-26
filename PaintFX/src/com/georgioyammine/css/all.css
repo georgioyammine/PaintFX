@@ -1,0 +1,38 @@
+#lockUnlock, #ScaleSlider {
+	-fx-cursor: hand;
+}
+
+#lockUnlock:hover {
+	-fx-translate-y: -1px;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+	
+.transparent-button {
+	-fx-background-color: transparent;
+}	
+
+.transparent-button:hover {
+	-fx-border-color: rgb(200,200,220);
+	-fx-background-color: rgb(200,200,220);
+	-fx-opacity: 30%;
+	-fx-border-radius:0px;
+	-fx-cursor: hand;
+}	
+.transparent-button:disabled {
+	-fx-border-color:  rgb(240,242,243);
+	-fx-background-color:  rgb(240,242,243);
+	-fx-opacity: 90%;
+	-fx-border-radius:0px;
+	-fx-cursor: disabled;
+}	
+.selected-tool{
+	-fx-border-color: rgb(200,200,220);
+	-fx-background-color: rgb(200,200,220);
+	-fx-opacity: 30%;
+	-fx-border-radius:0px;
+	-fx-cursor: hand;
+}
+

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#checkEscape" prefHeight="550.0" prefWidth="1100.0" stylesheets="@../css/all.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.georgioyammine.controllers.PaintFXController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newFile" text="New">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Settings" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#undo" text="Undo">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#redo" text="Redo">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                     </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#openAbout" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <TabPane minHeight="-Infinity" prefHeight="145.0" prefWidth="728.0" style="-fx-background-color: rgb(240,242,243);" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Home">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="110.0" prefWidth="191.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/open-archive.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label text="Open">
+                                                         <font>
+                                                            <Font size="11.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="1.0">
+                                                   <children>
+                                                      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/add-file.png" />
+                                                         </image>
+                                                         <VBox.margin>
+                                                            <Insets left="-2.0" />
+                                                         </VBox.margin>
+                                                      </ImageView>
+                                                      <Label text="New">
+                                                         <font>
+                                                            <Font size="11.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/floppy-disk.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label text="Save">
+                                                         <font>
+                                                            <Font size="11.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="191.0" text="FIle" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <VBox prefHeight="110.0" prefWidth="130.0">
+                                       <children>
+                                          <GridPane alignment="CENTER" hgap="10.0" prefHeight="100.0" prefWidth="130.0" styleClass="tools-grid" vgap="5.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="7.0" left="16.0" right="16.0" top="9.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/pencil32.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/paintbrush.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/eraser.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/fill.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/pipette.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <Button id="pencil" fx:id="pencilBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                                                <Button id="brush" fx:id="brushBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.columnIndex="1" />
+                                                <Button id="eraser" fx:id="EraserBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.columnIndex="2" />
+                                                <Button id="bucket" fx:id="bucketBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets />
+                                                   </GridPane.margin>
+                                                </Button>
+                                                <Button id="picker" fx:id="pickerBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="191.0" text="Tools" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <VBox prefHeight="110.0" prefWidth="130.0">
+                                       <children>
+                                          <GridPane alignment="CENTER" hgap="10.0" prefHeight="100.0" prefWidth="130.0" styleClass="tools-grid" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets bottom="7.0" left="16.0" right="16.0" top="9.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/rectangle.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/rounded-rectangle.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../images/ellipse-outline-shape-variant.png" />
+                                                   </image>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </GridPane.margin>
+                                                </ImageView>
+                                                <Button id="rect" fx:id="rectBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                                                <Button id="roundrect" fx:id="roundRectBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.columnIndex="1" />
+                                                <Button id="ellipse" fx:id="ellipseBtn" mnemonicParsing="false" onMouseClicked="#selectTool" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" GridPane.columnIndex="2" />
+                                             </children>
+                                          </GridPane>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="191.0" text="Shapes" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <VBox prefHeight="116.0" prefWidth="232.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="86.0" spacing="6.0">
+                                                   <children>
+                                                      <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/width.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox fx:id="sizeCombo" onAction="#changeSize" prefHeight="25.0" prefWidth="70.0" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox prefHeight="81.0" prefWidth="138.0" spacing="10.0">
+                                                   <children>
+                                                      <ColorPicker fx:id="colorPicker1" onAction="#changeColor1" />
+                                                      <ColorPicker fx:id="colorPicker2" onAction="#changeColor2" />
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets top="14.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="191.0" text="Customizations" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <VBox prefHeight="116.0" prefWidth="176.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="150.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="80.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/undo2.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label text="Undo">
+                                                         <font>
+                                                            <Font size="11.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="80.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/redo2.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label text="Redo">
+                                                         <font>
+                                                            <Font size="11.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="5.0" right="5.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="160.0" text="History tracking" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                 </children>
+                              </HBox>
+                              <Button layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#openFile" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                              <Button layoutX="66.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#newFile" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                              <Button layoutX="124.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#saveFile" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                              <Button fx:id="undoBtn" layoutX="834.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#undo" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                              <Button fx:id="redoBtn" layoutX="913.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#redo" prefHeight="80.0" prefWidth="60.0" styleClass="transparent-button" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab onSelectionChanged="#exitedCanvasTab" text="Canvas">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="116.0" prefWidth="350.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="331.0" spacing="10.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="72.0" spacing="10.0">
+                                                   <children>
+                                                      <Label text="Width" />
+                                                      <TextField fx:id="widthTextField" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="72.0" spacing="10.0">
+                                                   <children>
+                                                      <Label text="Height" />
+                                                      <TextField fx:id="heightTextField" />
+                                                   </children>
+                                                </VBox>
+                                                <Button mnemonicParsing="false" onAction="#applyDimensions" text="Change">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="27.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#discardDimensions" text="Discard">
+                                                   <HBox.margin>
+                                                      <Insets top="27.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="191.0" text="Dimensions" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <Separator prefWidth="200.0" />
+            <AnchorPane fx:id="BigAnchor" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(238,238,238);" VBox.vgrow="ALWAYS">
+               <children>
+                  <ScrollPane fx:id="ScrollPane" fitToHeight="true" fitToWidth="true" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <Group>
+                           <children>
+                              <Group fx:id="group">
+                                 <children>
+                                    <AnchorPane fx:id="CanvasAnchor" prefHeight="400.0" prefWidth="1000.0" style="-fx-background-color: white;">
+                                       <children>
+                                          <Canvas fx:id="Canvas" height="400.0" width="1000.0">
+                        </Canvas>
+                                       </children>
+                                       <effect>
+                                          <DropShadow blurType="GAUSSIAN" color="#868484" height="38.93" offsetX="5.0" offsetY="5.0" radius="14.425" width="20.77" />
+                                       </effect>
+                                    </AnchorPane>
+                                 </children>
+                              </Group>
+                           </children>
+                        </Group>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <Separator prefWidth="200.0" />
+            <GridPane alignment="BASELINE_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="728.0" snapToPixel="false" style="-fx-background-color: rgb(240,242,243);">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="pixelXY" text="0, 0" GridPane.halignment="CENTER" />
+                  <Label fx:id="projectName" text="Not Saved yet" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Label fx:id="canvasWidthHeight" text="Width, Height" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Label fx:id="zoomLabel" text="100%" GridPane.columnIndex="3" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="2.0" left="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Slider fx:id="ScaleSlider" blockIncrement="25.0" max="200.0" maxWidth="200.0" min="25.0" minorTickCount="0" prefHeight="14.0" prefWidth="50.0" showTickMarks="true" snapToTicks="true" value="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets left="40.0" right="40.0" top="5.0" />
+                     </GridPane.margin>
+                  </Slider>
+                  <ImageView fx:id="lockUnlock" fitHeight="20.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="2.0" right="15.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@../images/lock20.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
