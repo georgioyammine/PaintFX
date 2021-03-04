@@ -8,6 +8,10 @@ This Tool is built by **Georgio Yammine**.
 ## Tools Used
 **Java 8**, **JavaFX** and **FXML** with **JMetro** Library.
 
+* [Oracle JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) is required for running the app and can be downloaded from [here](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html). 
+    * Be sure to have the path set to jdk 8. 
+    * This can be checked by calling `java -version`
+
 ## Drawing tools
 **Pen**, **Brush**, **Eraser**, **Color Picker**, **Bucket Fill**, along **2 color selectors** one for left click and the other for the right click.
 
