@@ -1,3 +1,4 @@
+![image1](https://user-images.githubusercontent.com/61707078/120885293-dc133000-c5f0-11eb-8709-ca1c5f64eceb.png)
 # PaintFX
 
 PaintFX is an application in Java for **drawing**, **graphics editing**, and **image editing**, similar to MSPaint. 
@@ -71,8 +72,9 @@ We have two important branches:
 The project is licensed under GPL 3. See [LICENSE](https://github.com/georgioyammine/PaintFX/blob/main/LICENSE) file for the full license.
 
 ## Preview
-![new project]()
-![drawings]()
-![edit image]()
-![change size]()
+![new project](https://user-images.githubusercontent.com/61707078/120885302-e6cdc500-c5f0-11eb-8e9f-f2bf27de6b9f.png)
+![drawings](https://user-images.githubusercontent.com/61707078/120885317-fa792b80-c5f0-11eb-91ef-4a311e2e60cf.png)
+![edit image](https://user-images.githubusercontent.com/61707078/120885329-04029380-c5f1-11eb-86c0-7c29f0d7de27.png)
+![change size](https://user-images.githubusercontent.com/61707078/120885352-1d0b4480-c5f1-11eb-94c1-94d1d13a4190.png)
+
 
