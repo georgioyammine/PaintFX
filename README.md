@@ -1,4 +1,3 @@
-![image1](https://user-images.githubusercontent.com/61707078/120885293-dc133000-c5f0-11eb-8709-ca1c5f64eceb.png)
 # PaintFX
 
 PaintFX is an application in Java for **drawing**, **graphics editing**, and **image editing**, similar to MSPaint. 
