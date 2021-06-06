@@ -3,6 +3,7 @@ module PaintFx {
     requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires java.prefs;
     requires org.jfxtras.styles.jmetro;
 //    requires org.controlsfx.controls;

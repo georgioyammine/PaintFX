@@ -452,7 +452,7 @@
                                  <children>
                                     <AnchorPane fx:id="CanvasAnchor" prefHeight="400.0" prefWidth="1000.0" style="-fx-background-color: white;">
                                        <children>
-                                          <Canvas fx:id="Canvas" height="400.0" width="1000.0">
+                                          <Canvas fx:id="canvas" height="400.0" width="1000.0">
                         </Canvas>
                                        </children>
                                        <effect>
