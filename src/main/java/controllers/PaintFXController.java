@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
+import classes.CanvasHistory;
 import classes.ImageFxIO;
 import classes.PixelXY;
 import javafx.collections.FXCollections;
@@ -97,9 +98,8 @@ public class PaintFXController {
 	String selectedTool = "";
 	GraphicsContext gc;
 	double prevX, prevY;
-	Stack<GraphicsContext> stack = new Stack<>();
-	Stack<Image> undoStack = new Stack<>();
-	Stack<Image> redoStack = new Stack<>();
+	Stack<CanvasHistory> undoStack;
+	Stack<CanvasHistory> redoStack;
 	int SizeVal = 1;
 	Color color1, color2;
 	File file;
@@ -116,14 +116,20 @@ public class PaintFXController {
 		initializeColors();
 		initializeSizes();
 		SetupDrawEvents();
+		initializeHistory();
 		disableEnableRedoUndo();
 //		gc.setImageSmoothing(false);
 	}
 
+	private void initializeHistory() {
+		undoStack = new Stack<>();
+		redoStack = new Stack<>();
+		if (undoStack.isEmpty())
+			undoStack.add(new CanvasHistory(canvas.snapshot(null, null)));
+	}
+
 	private void SetupDrawEvents() {
 		canvas.setOnMousePressed((e) -> {
-			if (undoStack.isEmpty())
-				undoStack.add(canvas.snapshot(null, null));
 			if (selectedTool.isEmpty())
 				return;
 			if (e.isPrimaryButtonDown()) {
@@ -220,18 +226,18 @@ public class PaintFXController {
 
 				break;
 			case "rect":
-				gc.drawImage(undoStack.peek(), 0, 0);
+				gc.drawImage(undoStack.peek().getImage(), 0, 0);
 				gc.strokeRect(Math.min(prevX,e.getX()), Math.min(prevY,e.getY()),
 						Math.abs(e.getX()-prevX), Math.abs(e.getY()-prevY));
 				break;
 			case "roundrect":
-				gc.drawImage(undoStack.peek(), 0, 0);
+				gc.drawImage(undoStack.peek().getImage(), 0, 0);
 				gc.strokeRoundRect(Math.min(prevX,e.getX()), Math.min(prevY,e.getY()),
 						Math.abs(e.getX()-prevX), Math.abs(e.getY()-prevY),
 						Math.min(Math.abs(e.getX()-prevX)/5, 50),Math.min(Math.abs(e.getX()-prevX)/5, 50));
 				break;
 			case "ellipse":
-				gc.drawImage(undoStack.peek(), 0, 0);
+				gc.drawImage(undoStack.peek().getImage(), 0, 0);
 				gc.strokeOval(Math.min(prevX,e.getX()), Math.min(prevY,e.getY()),
 						Math.abs(e.getX()-prevX), Math.abs(e.getY()-prevY));
 				break;
@@ -241,9 +247,9 @@ public class PaintFXController {
 			}
 		});
 		canvas.setOnMouseReleased((e) -> {
-			if (!compareImages(undoStack.peek(), (canvas.snapshot(null, null)))) {
-				undoStack.add(canvas.snapshot(null, null));
-				redoStack = new Stack<Image>();
+			if (!compareImages(undoStack.peek().getImage(), (canvas.snapshot(null, null)))) {
+				undoStack.add(new CanvasHistory(canvas.snapshot(null, null)));
+				redoStack = new Stack();
 				disableEnableRedoUndo();
 			}
 		});
@@ -452,9 +458,13 @@ public class PaintFXController {
 
 	@FXML
 	public void undo() {
+		System.out.println(undoStack.peek());
 		if (undoStack.size() > 1) {
 			redoStack.add(undoStack.pop());
-			gc.drawImage(undoStack.peek(), 0, 0);
+			if(undoStack.peek().DimensionsChanged()) {
+				changeDimensions(undoStack.peek().getWidth(), undoStack.peek().getHeight());
+			}
+			gc.drawImage(undoStack.peek().getImage(), 0, 0);
 		}
 		disableEnableRedoUndo();
 	}
@@ -463,7 +473,11 @@ public class PaintFXController {
 	public void redo() {
 		if (redoStack.size() > 0) {
 			undoStack.add(redoStack.peek());
-			gc.drawImage(redoStack.pop(), 0, 0);
+			CanvasHistory canvasHistory = redoStack.pop();
+			if(canvasHistory.DimensionsChanged()) {
+				changeDimensions(canvasHistory.getWidth(), canvasHistory.getHeight());
+			}
+			gc.drawImage(canvasHistory.getImage(), 0, 0);
 		}
 		disableEnableRedoUndo();
 	}
@@ -482,13 +496,11 @@ public class PaintFXController {
 
 	@FXML
 	public void newFile() {
-		undoStack = new Stack<>();
-		redoStack = new Stack<>();
-		disableEnableRedoUndo();
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		projectName.setText("Not Saved yet");
 		file = null;
-		
+		initializeHistory();
+		disableEnableRedoUndo();
 	}
 
 	@FXML
@@ -581,14 +593,27 @@ public class PaintFXController {
 
 	@FXML
 	public void applyDimensions() {
+		int w = Integer.parseInt(widthTextField.getText());
+		int h = Integer.parseInt(heightTextField.getText());
+		if(w < 1 || h < 1) {
+			widthTextField.setText((int) canvas.getWidth() + "");
+			heightTextField.setText((int) canvas.getHeight() + "");
+			return;
+		}
+
+		undoStack.add(new CanvasHistory((int)canvas.getWidth(), (int)canvas.getHeight(),
+				undoStack.pop().getImage()));
+
+		changeDimensions(w, h);
+
+		undoStack.add(new CanvasHistory((int)canvas.getWidth(), (int)canvas.getHeight(),
+				canvas.snapshot(null, null)));
+		disableEnableRedoUndo();
+	}
+
+	private void changeDimensions(int w, int h) {
+		System.out.println("c d");
 		try {
-			int w = Integer.parseInt(widthTextField.getText());
-			int h = Integer.parseInt(heightTextField.getText());
-			if(w < 1 || h < 1) {
-				widthTextField.setText((int) canvas.getWidth() + "");
-				heightTextField.setText((int) canvas.getHeight() + "");
-				return;
-			}
 			canvas.setHeight(h);
 			canvas.setWidth(w);
 			CanvasAnchor.setPrefHeight(h);
@@ -600,7 +625,7 @@ public class PaintFXController {
 			Thread.sleep(1);
 			group.setScaleX(zoom);
 			group.setScaleY(zoom);
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			widthTextField.setText((int) canvas.getWidth() + "");
 			heightTextField.setText((int) canvas.getHeight() + "");
 		}
@@ -613,7 +638,7 @@ public class PaintFXController {
 
 	@FXML public void checkEscape(KeyEvent e) {
 		if(e.getCode()== KeyCode.ESCAPE) {
-			gc.drawImage(undoStack.peek(), 0, 0);
+			gc.drawImage(undoStack.peek().getImage(), 0, 0);
 		}
 	}
 
